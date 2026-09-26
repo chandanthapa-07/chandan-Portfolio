@@ -1,15 +1,7 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { animations } from '@/lib/animations';
-import { socialLinks } from '@/data/content';
-
-const navItems = [
-  { label: 'WORK', href: '#projects' },
-  { label: 'ABOUT', href: '#about' },
-  { label: 'SKILLS', href: '#skills' },
-  { label: 'CONTACT', href: '#contact' },
-];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,7 +11,6 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      // Update active section based on scroll position
       const sections = ['hero', 'about', 'skills', 'projects', 'services', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 100;
       
@@ -61,18 +52,18 @@ export default function Navbar() {
           : 'bg-transparent py-6'
       )}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex items-center justify-between\">
         <motion.a
           href="#hero"
           onClick={() => scrollToSection('#hero')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="text-xl font-space-grotesk font-bold text-white hover:text-cyan-400 transition-colors"
+          className="text-xl font-space-grotesk font-bold text-white hover:text-cyan-400 transition-colors\"
         >
           CHANDAN
         </motion.a>
 
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-8\">
           {navItems.map((item) => (
             <motion.a
               key={item.label}
@@ -80,7 +71,7 @@ export default function Navbar() {
               onClick={() => scrollToSection(item.href)}
               whileHover={{ y: -2 }}
               className={cn(
-                'text-sm font-medium transition-colors relative',
+                'text-sm font-medium transition-colors relative\',
                 activeSection === item.href.replace('#', '')
                   ? 'text-cyan-400'
                   : 'text-gray-300 hover:text-white'
@@ -90,7 +81,7 @@ export default function Navbar() {
               {activeSection === item.href.replace('#', '') && (
                 <motion.div
                   layoutId="activeIndicator"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-cyan-400 rounded-full"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-cyan-400 rounded-full\"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
@@ -106,20 +97,10 @@ export default function Navbar() {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="hidden md:block px-6 py-2 bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 rounded-md hover:bg-cyan-500/30 transition-all text-sm font-medium"
+          className="hidden md:block px-6 py-2 bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 rounded-md hover:bg-cyan-500/30 transition-all text-sm font-medium\"
         >
           Let's Talk
         </motion.a>
-
-        {/* Mobile menu button */}
-        <motion.button
-          whileTap={{ scale: 0.95 }}
-          className="md:hidden w-8 h-8 flex flex-col justify-center items-center space-y-1"
-        >
-          <motion.div className="w-6 h-0.5 bg-white rounded-full" />
-          <motion.div className="w-6 h-0.5 bg-white rounded-full" />
-          <motion.div className="w-6 h-0.5 bg-white rounded-full" />
-        </motion.button>
       </div>
     </motion.nav>
   );
