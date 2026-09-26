@@ -1,26 +1,23 @@
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
 
-export const metadata: Metadata = {
-  title: 'Chandan Thapa - Full-Stack Developer & Creative Technologist',
-  description: 'Portfolio of Chandan Thapa, a full-stack developer and creative technologist building modern web applications.',
-  keywords: ['developer', 'full-stack', 'web developer', 'portfolio', 'react', 'next.js'],
-  authors: [{ name: 'Chandan Thapa' }],
-  openGraph: {
-    title: 'Chandan Thapa - Full-Stack Developer & Creative Technologist',
-    description: 'Portfolio of Chandan Thapa, a full-stack developer and creative technologist building modern web applications.',
-    type: 'website',
-    locale: 'en_US',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Chandan Thapa - Full-Stack Developer & Creative Technologist',
-    description: 'Portfolio of Chandan Thapa, a full-stack developer and creative technologist building modern web applications.',
-  },
-};
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
-const inter = Inter({ subsets: ['latin'] });
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+});
+
+export const metadata = {
+  title: 'Chandan Thapa — Full-Stack Developer & Creative Technologist',
+  description: 'Portfolio of Chandan Thapa, Full-Stack Developer, Designer & Creative Technologist building digital experiences where design meets technology.',
+};
 
 export default function RootLayout({
   children,
@@ -28,8 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html lang="en" className="scroll-smooth">
+      <body
+        className={`${inter.variable} ${spaceGrotesk.variable} font-inter antialiased bg-[#08090B] text-white overflow-x-hidden selection:bg-cyan-500 selection:text-white`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
