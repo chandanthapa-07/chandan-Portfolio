@@ -32,15 +32,15 @@ export default function Experience() {
 
           <div className="space-y-16\">
             {experience.map((item, index) => (
-              <motion.div
+<motion.div
                 key={item.year}
                 variants={animations.scaleReveal}
                 initial="hidden"
                 animate={inView ? 'visible' : 'hidden'}
                 transition={{ delay: index * 0.2 }}
-                className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}\"
+                className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
               >
-                <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'pl-8'}\">
+                <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'pl-8'}`}>
                   <div className="bg-[#101216] rounded-xl p-6 border border-white/10 hover:border-cyan-500/30 transition-all duration-300\">
                     <div className="text-2xl font-space-grotesk font-bold text-cyan-400 mb-2\">
                       {item.year}
