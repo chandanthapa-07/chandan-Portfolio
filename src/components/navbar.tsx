@@ -71,7 +71,7 @@ export default function Navbar() {
               onClick={() => scrollToSection(item.href)}
               whileHover={{ y: -2 }}
               className={cn(
-                'text-sm font-medium transition-colors relative\',
+                'text-sm font-medium transition-colors relative',
                 activeSection === item.href.replace('#', '')
                   ? 'text-cyan-400'
                   : 'text-gray-300 hover:text-white'
