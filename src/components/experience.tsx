@@ -1,3 +1,5 @@
+"use client";
+
 import { experience } from '@/data/content';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -32,7 +34,7 @@ export default function Experience() {
 
           <div className="space-y-16\">
             {experience.map((item, index) => (
-<motion.div
+              <motion.div
                 key={item.year}
                 variants={animations.scaleReveal}
                 initial="hidden"
@@ -40,7 +42,7 @@ export default function Experience() {
                 transition={{ delay: index * 0.2 }}
                 className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
               >
-                <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'pl-8'}`}>
+                <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'pl-8'}`>
                   <div className="bg-[#101216] rounded-xl p-6 border border-white/10 hover:border-cyan-500/30 transition-all duration-300\">
                     <div className="text-2xl font-space-grotesk font-bold text-cyan-400 mb-2\">
                       {item.year}
@@ -61,7 +63,7 @@ export default function Experience() {
                   className="w-6 h-6 rounded-full bg-cyan-500 border-4 border-[#08090B] z-10 relative\"
                 />
                 
-                <div className={`w-5/12 ${index % 2 === 0 ? 'pl-8' : 'pr-8'}\">
+                <div className={`w-5/12 ${index % 2 === 0 ? 'pl-8' : 'pr-8'}`>
                 </div>
               </motion.div>
             ))}

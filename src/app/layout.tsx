@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
@@ -14,9 +15,10 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 });
 
-export const metadata = {
-  title: 'Chandan Thapa — Full-Stack Developer & Creative Technologist',
-  description: 'Portfolio of Chandan Thapa, Full-Stack Developer, Designer & Creative Technologist building digital experiences where design meets technology.',
+export const metadata: Metadata = {
+  title: "Chandan Thapa | Full-Stack Developer",
+  description:
+    "Chandan Thapa — Full-Stack Developer, Backend Developer, MERN Stack Developer and UI/UX enthusiast.",
 };
 
 export default function RootLayout({
