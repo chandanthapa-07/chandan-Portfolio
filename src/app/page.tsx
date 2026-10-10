@@ -6,6 +6,8 @@ import Skills from '@/components/skills';
 import Projects from '@/components/projects';
 import Services from '@/components/services';
 import Experience from '@/components/experience';
+import ContactSection from '@/components/contact-section';
+import { Footer } from '@/components/footer/Footer';
 
 export default function Home() {
   return (
@@ -18,7 +20,8 @@ export default function Home() {
       <Projects />
       <Services />
       <Experience />
-      {/* Additional sections would go here */}
+      <ContactSection />
+      <Footer />
     </main>
   );
 }

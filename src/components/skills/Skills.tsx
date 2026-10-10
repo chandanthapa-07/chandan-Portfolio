@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { SkillCard } from './SkillCard';
+import { skills } from '@/data/skills';
 
 export function Skills() {
   return (

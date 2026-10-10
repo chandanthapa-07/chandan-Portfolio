@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ProjectCard } from './ProjectCard';
 import { ProjectModal } from './ProjectModal';
-import { Project } from '@/data/projects';
+import { ProjectFilter } from './ProjectFilter';
+import { projects, type Project } from '@/data/projects';
 
 const categories = ['All', 'Web', 'Full Stack', 'UI/UX', 'Design', 'Experiments'];
 

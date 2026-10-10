@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { Send, Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 export function ContactForm() {

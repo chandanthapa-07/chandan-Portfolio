@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Skill } from '@/data/skills';
 
@@ -10,8 +9,6 @@ interface SkillCardProps {
 }
 
 export function SkillCard({ skill, index }: SkillCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   const levelColors = {
     beginner: 'bg-blue-500/20 text-blue-400',
     intermediate: 'bg-green-500/20 text-green-400',
@@ -26,8 +23,6 @@ export function SkillCard({ skill, index }: SkillCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
       whileHover={{ scale: 1.05, y: -5 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
       className="p-6 rounded-xl bg-surface border border-border hover:border-accent-primary/50 transition-all duration-300"
     >
       <div className="flex items-center justify-between mb-4">

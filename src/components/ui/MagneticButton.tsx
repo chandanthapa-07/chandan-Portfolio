@@ -1,19 +1,23 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ButtonHTMLAttributes, forwardRef, useState } from 'react';
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  type HTMLMotionProps,
+} from 'framer-motion';
+import { forwardRef, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-interface MagneticButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+interface MagneticButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
+  children: ReactNode;
   strength?: number;
   radius?: number;
-  className?: string;
 }
 
 export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>(
-  ({ children, className, strength = 0.2, radius = 50, ...props }, ref) => {
-    const [isActive, setIsActive] = useState(false);
+  ({ children, className, strength = 0.2, radius = 50, style, ...props }, ref) => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -48,6 +52,7 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
           className
         )}
         style={{
+          ...style,
           x: transformX,
           y: transformY,
         }}

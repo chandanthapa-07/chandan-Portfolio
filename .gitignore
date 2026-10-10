@@ -16,3 +16,14 @@ build
 *.suo
 *.sln
 *.swp
+
+# BEGIN JARVIS MANAGED (see jarvis.gitignore.autoManage)
+.jarvis/logs/
+.jarvis/messages/
+.jarvis/state/
+.jarvis/heartbeat.yaml
+.jarvis/reminders.yaml
+.jarvis/syspilot-state.json
+jarvis-*
+!packages/*/assets/**
+# END JARVIS MANAGED

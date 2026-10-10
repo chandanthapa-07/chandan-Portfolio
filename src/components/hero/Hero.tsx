@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
+import { HeroBackground } from './HeroBackground';
+import { HeroVisual } from './HeroVisual';
 
 export function Hero() {
   return (

@@ -1,73 +1,45 @@
 "use client";
 
+import { motion, useReducedMotion } from 'framer-motion';
 import { experience } from '@/data/content';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { animations } from '@/lib/animations';
 
 export default function Experience() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section id="experience" className="py-32 md:py-40 bg-[#08090B] relative\">
-      <div className="relative z-10 max-w-6xl mx-auto px-6\">
+    <section id="experience" className="section section--soft">
+      <div className="section-inner">
         <motion.div
-          ref={ref}
-          variants={animations.scrollReveal}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="text-center mb-20\"
+          className="section-heading section-heading--center"
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.55, ease: 'easeOut' }}
         >
-          <h2 className="text-4xl md:text-6xl font-space-grotesk font-bold text-white mb-6\">
-            JOURNEY
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full mx-auto\"
-          />
+          <p className="section-kicker">The journey so far</p>
+          <h2 className="section-title">Curiosity in motion.</h2>
+          <p className="section-lead">
+            A continuing journey through technology, design, and making ideas real.
+          </p>
         </motion.div>
 
-        <div className="relative\">
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-cyan-500 via-pink-500 to-cyan-500 h-full rounded-full\"
-          />
-
-          <div className="space-y-16\">
-            {experience.map((item, index) => (
-              <motion.div
-                key={item.year}
-                variants={animations.scaleReveal}
-                initial="hidden"
-                animate={inView ? 'visible' : 'hidden'}
-                transition={{ delay: index * 0.2 }}
-                className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-              >
-                <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'pl-8'}`>
-                  <div className="bg-[#101216] rounded-xl p-6 border border-white/10 hover:border-cyan-500/30 transition-all duration-300\">
-                    <div className="text-2xl font-space-grotesk font-bold text-cyan-400 mb-2\">
-                      {item.year}
-                    </div>
-                    <h3 className="text-xl font-space-grotesk font-semibold text-white mb-3\">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed\">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-                
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={inView ? { scale: 1 } : {}}
-                  transition={{ delay: index * 0.2 + 0.3, duration: 0.5, ease: 'backOut(1.5)' }}
-                  className="w-6 h-6 rounded-full bg-cyan-500 border-4 border-[#08090B] z-10 relative\"
-                />
-                
-                <div className={`w-5/12 ${index % 2 === 0 ? 'pl-8' : 'pr-8'}`>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="timeline">
+          {experience.map((item, index) => (
+            <motion.article
+              className="glass-panel timeline-card"
+              key={`${item.year}-${item.title}`}
+              initial={reduceMotion ? false : { opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.45, delay: Math.min(index * 0.06, 0.3) }}
+            >
+              <span className="timeline-year">{item.year}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

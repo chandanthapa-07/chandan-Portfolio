@@ -1,107 +1,129 @@
-import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { animations } from '@/lib/animations';
+"use client";
+
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+const navItems = [
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Work', href: '#projects' },
+  { label: 'Services', href: '#services' },
+  { label: 'Journey', href: '#experience' },
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
+    const sections = ['hero', ...navItems.map(({ href }) => href.slice(1)), 'contact'];
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      
-      const sections = ['hero', 'about', 'skills', 'projects', 'services', 'experience', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-      
-      for (const section of sections) {
+      setIsScrolled(window.scrollY > 12);
+
+      const currentSection = sections.find((section) => {
         const element = document.getElementById(section);
-        if (element) {
-          const offset = element.offsetTop;
-          const height = element.offsetHeight;
-          
-          if (scrollPosition >= offset && scrollPosition < offset + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+        if (!element) return false;
+        const { top, bottom } = element.getBoundingClientRect();
+        return top <= 140 && bottom > 140;
+      });
+
+      if (currentSection) setActiveSection(currentSection);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300',
-        isScrolled
-          ? 'bg-[#08090B]/80 backdrop-blur-md border-b border-white/10 py-3'
-          : 'bg-transparent py-6'
-      )}
-    >
-      <div className="max-w-7xl mx-auto flex items-center justify-between\">
-        <motion.a
-          href="#hero"
-          onClick={() => scrollToSection('#hero')}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="text-xl font-space-grotesk font-bold text-white hover:text-cyan-400 transition-colors\"
-        >
-          CHANDAN
-        </motion.a>
+    <>
+      <motion.header
+        initial={reduceMotion ? false : { opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+        className={`site-nav${isScrolled ? ' site-nav--scrolled' : ''}`}
+      >
+        <a className="brand" href="#hero" onClick={closeMenu} aria-label="Chandan Thapa, home">
+          <span className="brand__mark">CT</span>
+          <span>CHANDAN THAPA</span>
+        </a>
 
-        <div className="hidden md:flex items-center space-x-8\">
-          {navItems.map((item) => (
-            <motion.a
-              key={item.label}
-              href={item.href}
-              onClick={() => scrollToSection(item.href)}
-              whileHover={{ y: -2 }}
-              className={cn(
-                'text-sm font-medium transition-colors relative',
-                activeSection === item.href.replace('#', '')
-                  ? 'text-cyan-400'
-                  : 'text-gray-300 hover:text-white'
-              )}
-            >
-              {item.label}
-              {activeSection === item.href.replace('#', '') && (
-                <motion.div
-                  layoutId="activeIndicator"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-cyan-400 rounded-full\"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              )}
-            </motion.a>
-          ))}
-        </div>
+        <nav className="nav-links" aria-label="Main navigation">
+          {navItems.map(({ label, href }) => {
+            const section = href.slice(1);
+            return (
+              <a
+                key={href}
+                className={`nav-link${activeSection === section ? ' nav-link--active' : ''}`}
+                href={href}
+                aria-current={activeSection === section ? 'location' : undefined}
+              >
+                {label}
+              </a>
+            );
+          })}
+        </nav>
 
-        <motion.a
-          href={socialLinks.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="hidden md:block px-6 py-2 bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 rounded-md hover:bg-cyan-500/30 transition-all text-sm font-medium\"
+        <a className="button button--glass site-nav__cta" href="#contact">
+          Let&apos;s talk <span aria-hidden="true">↗</span>
+        </a>
+
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
         >
-          Let's Talk
-        </motion.a>
-      </div>
-    </motion.nav>
+          {menuOpen ? <X size={19} /> : <Menu size={19} />}
+        </button>
+      </motion.header>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            id="mobile-navigation"
+            className="mobile-menu"
+            aria-label="Mobile navigation"
+            initial={reduceMotion ? false : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+          >
+            {navItems.map(({ label, href }) => {
+              const section = href.slice(1);
+              return (
+                <a
+                  key={href}
+                  className={`nav-link${activeSection === section ? ' nav-link--active' : ''}`}
+                  href={href}
+                  onClick={closeMenu}
+                >
+                  {label}
+                </a>
+              );
+            })}
+            <a className="button button--primary" href="#contact" onClick={closeMenu}>
+              Start a conversation <span aria-hidden="true">↗</span>
+            </a>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
