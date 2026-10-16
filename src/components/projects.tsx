@@ -35,12 +35,17 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={!reduceMotion ? { scale: 1.03, y: -8 } : undefined}
             >
               <div className={artworkClasses[index % artworkClasses.length]} aria-hidden="true">
-                <div className="work-art__window">
+                <motion.div
+                  className="work-art__window"
+                  whileHover={!reduceMotion ? { rotate: 0, scale: 1.05 } : undefined}
+                  transition={{ duration: 0.3 }}
+                >
                   <div className="work-art__bar"><i /><i /><i /></div>
                   <div className="work-art__content"><i /><i /></div>
-                </div>
+                </motion.div>
               </div>
               <div className="work-card__body">
                 <div className="work-card__meta">
@@ -51,12 +56,22 @@ export default function Projects() {
                 <p>{project.description}</p>
                 <div className="work-card__tags" aria-label="Technologies">
                   {project.technologies.slice(0, 4).map((technology) => (
-                    <span className="tech-chip" key={technology}>{technology}</span>
+                    <motion.span
+                      className="tech-chip"
+                      key={technology}
+                      whileHover={!reduceMotion ? { background: 'rgba(118, 228, 212, 0.15)', borderColor: 'rgba(118, 228, 212, 0.3)' } : undefined}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {technology}
+                    </motion.span>
                   ))}
                 </div>
-                <span className="work-card__hint">
+                <motion.span
+                  className="work-card__hint"
+                  whileHover={!reduceMotion ? { color: 'var(--accent)' } : undefined}
+                >
                   Product design &amp; development <ArrowUpRight size={14} aria-hidden="true" />
-                </span>
+                </motion.span>
               </div>
             </motion.article>
           ))}

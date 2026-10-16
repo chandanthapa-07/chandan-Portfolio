@@ -1,4 +1,7 @@
-import { social } from '@/data/social';
+"use client";
+
+import { motion } from 'framer-motion';
+import { social } from '../../data/social';
 
 const footerLinks = [
   { label: 'About', href: '#about' },
@@ -11,16 +14,42 @@ const footerLinks = [
 export function Footer() {
   return (
     <footer className="site-footer">
-      <a className="brand" href="#hero">
+      <motion.a
+        className="brand"
+        href="#hero"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ duration: 0.2 }}
+      >
         <span className="brand__mark">CT</span>
         <span>CHANDAN THAPA</span>
-      </a>
+      </motion.a>
       <nav className="footer-links" aria-label="Footer navigation">
-        {footerLinks.map(({ label, href }) => <a href={href} key={href}>{label}</a>)}
+        {footerLinks.map(({ label, href }) => (
+          <motion.a
+            href={href}
+            key={href}
+            whileHover={{ scale: 1.05, color: 'var(--accent)' }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            {label}
+          </motion.a>
+        ))}
       </nav>
       <div className="footer-links" aria-label="Social links">
         {social.map(({ name, url }) => (
-          <a href={url} key={name} target="_blank" rel="noopener noreferrer">{name}</a>
+          <motion.a
+            href={url}
+            key={name}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05, color: 'var(--accent)' }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            {name}
+          </motion.a>
         ))}
       </div>
       <span>© {new Date().getFullYear()} Chandan Thapa</span>

@@ -118,6 +118,11 @@ img {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.1em;
+  transition: transform 200ms ease;
+}
+
+.brand:hover {
+  transform: scale(1.02);
 }
 
 .brand__mark {
@@ -146,7 +151,7 @@ img {
   font-size: 12px;
   font-weight: 550;
   letter-spacing: 0.045em;
-  transition: color 180ms ease;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
 .nav-link:hover,

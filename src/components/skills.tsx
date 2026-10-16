@@ -32,13 +32,20 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.45, delay: index * 0.07 }}
+              whileHover={!reduceMotion ? { scale: 1.02, borderColor: 'rgba(118, 228, 212, 0.2)' } : undefined}
             >
               <h3>{category}</h3>
               <div className="skill-list">
                 {items.map((skill) => (
-                  <span className="skill-chip" key={skill.name} title={skill.description}>
+                  <motion.span
+                    className="skill-chip"
+                    key={skill.name}
+                    title={skill.description}
+                    whileHover={!reduceMotion ? { scale: 1.05, background: 'rgba(118, 228, 212, 0.12)', borderColor: 'rgba(118, 228, 212, 0.25)' } : undefined}
+                    transition={{ duration: 0.2 }}
+                  >
                     {skill.name}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </motion.article>

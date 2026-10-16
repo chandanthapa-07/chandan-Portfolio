@@ -81,23 +81,36 @@ export default function Hero() {
               fill
               priority
               sizes="(max-width: 700px) 74vw, (max-width: 1100px) 38vw, 440px"
+              className="rounded-full object-cover"
             />
           </motion.div>
 
-          <div className="float-card float-card--top">
+          <motion.div
+            className="float-card float-card--top"
+            whileHover={reduceMotion ? undefined : { scale: 1.05, y: -4 }}
+            transition={{ duration: 0.2 }}
+          >
             <Code2 className="float-card__icon" size={16} aria-hidden="true" />
             Building for the web
-          </div>
-          <div className="float-card float-card--bottom">
+          </motion.div>
+          <motion.div
+            className="float-card float-card--bottom"
+            whileHover={reduceMotion ? undefined : { scale: 1.05, y: -4 }}
+            transition={{ duration: 0.2 }}
+          >
             <Sparkles className="float-card__icon" size={16} aria-hidden="true" />
             {technologies.slice(0, 3).join(' · ')}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
-      <a className="sr-only focus:not-sr-only" href="#about">
+      <motion.a
+        className="sr-only focus:not-sr-only"
+        href="#about"
+        whileHover={reduceMotion ? undefined : { opacity: 0.8 }}
+      >
         <ArrowDown size={16} aria-hidden="true" /> Scroll to learn more
-      </a>
+      </motion.a>
     </section>
   );
 }

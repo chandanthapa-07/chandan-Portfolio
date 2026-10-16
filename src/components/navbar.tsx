@@ -66,32 +66,45 @@ export default function Navbar() {
           {navItems.map(({ label, href }) => {
             const section = href.slice(1);
             return (
-              <a
+              <motion.a
                 key={href}
                 className={`nav-link${activeSection === section ? ' nav-link--active' : ''}`}
                 href={href}
                 aria-current={activeSection === section ? 'location' : undefined}
+                whileHover={!reduceMotion ? { scale: 1.05, color: 'var(--text)' } : undefined}
+                whileTap={!reduceMotion ? { scale: 0.95 } : undefined}
+                transition={{ duration: 0.2 }}
               >
                 {label}
-              </a>
+              </motion.a>
             );
           })}
         </nav>
 
-        <a className="button button--glass site-nav__cta" href="#contact">
+        <motion.a
+          className="button button--glass site-nav__cta"
+          href="#contact"
+          whileHover={!reduceMotion ? { scale: 1.05, background: 'rgba(118, 228, 212, 0.12)' } : undefined}
+          whileTap={!reduceMotion ? { scale: 0.95 } : undefined}
+          transition={{ duration: 0.2 }}
+          onClick={closeMenu}
+        >
           Let&apos;s talk <span aria-hidden="true">↗</span>
-        </a>
+        </motion.a>
 
-        <button
+        <motion.button
           className="menu-toggle"
           type="button"
           aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
+          whileHover={!reduceMotion ? { scale: 1.05, borderColor: 'rgba(118, 228, 212, 0.35)' } : undefined}
+          whileTap={!reduceMotion ? { scale: 0.95 } : undefined}
+          transition={{ duration: 0.2 }}
         >
           {menuOpen ? <X size={19} /> : <Menu size={19} />}
-        </button>
+        </motion.button>
       </motion.header>
 
       <AnimatePresence>
@@ -108,19 +121,29 @@ export default function Navbar() {
             {navItems.map(({ label, href }) => {
               const section = href.slice(1);
               return (
-                <a
+                <motion.a
                   key={href}
                   className={`nav-link${activeSection === section ? ' nav-link--active' : ''}`}
                   href={href}
                   onClick={closeMenu}
+                  whileHover={!reduceMotion ? { scale: 1.05, background: 'rgba(118, 228, 212, 0.08)' } : undefined}
+                  whileTap={!reduceMotion ? { scale: 0.95 } : undefined}
+                  transition={{ duration: 0.2 }}
                 >
                   {label}
-                </a>
+                </motion.a>
               );
             })}
-            <a className="button button--primary" href="#contact" onClick={closeMenu}>
+            <motion.a
+              className="button button--primary"
+              href="#contact"
+              onClick={closeMenu}
+              whileHover={!reduceMotion ? { scale: 1.05 } : undefined}
+              whileTap={!reduceMotion ? { scale: 0.95 } : undefined}
+              transition={{ duration: 0.2 }}
+            >
               Start a conversation <span aria-hidden="true">↗</span>
-            </a>
+            </motion.a>
           </motion.nav>
         )}
       </AnimatePresence>

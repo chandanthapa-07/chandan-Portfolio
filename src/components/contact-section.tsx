@@ -15,6 +15,7 @@ export default function ContactSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.55, ease: 'easeOut' }}
+        whileHover={!reduceMotion ? { scale: 1.01, boxShadow: '0 32px 96px rgba(118, 228, 212, 0.15)' } : undefined}
       >
         <div>
           <p className="section-kicker">Have something in mind?</p>
@@ -22,19 +23,30 @@ export default function ContactSection() {
           <p>Explore my work or connect with me on social.</p>
         </div>
         <div className="contact-actions">
-          <a
+          <motion.a
             className="button button--primary"
             href={social.find(({ name }) => name === 'GitHub')?.url ?? '#hero'}
             target="_blank"
             rel="noopener noreferrer"
+            whileHover={!reduceMotion ? { scale: 1.05, background: '#a0f4e7' } : undefined}
+            whileTap={!reduceMotion ? { scale: 0.95 } : undefined}
+            transition={{ duration: 0.2 }}
           >
             <Github size={15} aria-hidden="true" /> Find me on GitHub <ArrowUpRight size={15} aria-hidden="true" />
-          </a>
+          </motion.a>
           <div className="contact-socials" aria-label="Social profiles">
             {social.map(({ name, url }) => (
-              <a key={name} href={url} target="_blank" rel="noopener noreferrer">
+              <motion.a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={!reduceMotion ? { scale: 1.05, color: 'var(--accent)' } : undefined}
+                whileTap={!reduceMotion ? { scale: 0.95 } : undefined}
+                transition={{ duration: 0.2 }}
+              >
                 {name} <ArrowUpRight size={12} aria-hidden="true" />
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>

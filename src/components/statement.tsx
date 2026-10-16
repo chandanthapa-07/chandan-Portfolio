@@ -13,6 +13,7 @@ export default function Statement() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
+        whileHover={!reduceMotion ? { scale: 1.01, boxShadow: '0 32px 96px rgba(118, 228, 212, 0.15)' } : undefined}
       >
         <p className="section-kicker">My approach</p>
         <h2 className="statement-title">

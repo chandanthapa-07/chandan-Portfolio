@@ -32,6 +32,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, delay: 0.08 }}
+            whileHover={!reduceMotion ? { scale: 1.01, boxShadow: '0 20px 60px rgba(118, 228, 212, 0.15)' } : undefined}
           >
             <p>
               I&apos;m <strong>Chandan Thapa</strong>, a developer and designer focused on creating
@@ -45,9 +46,14 @@ export default function About() {
               I care about the details that make a product feel considered: accessible patterns,
               responsive layouts, meaningful motion, and maintainable code.
             </p>
-            <a className="button button--glass" href="#services">
+            <motion.a
+              className="button button--glass"
+              href="#services"
+              whileHover={!reduceMotion ? { scale: 1.05 } : undefined}
+              whileTap={!reduceMotion ? { scale: 0.95 } : undefined}
+            >
               How I can help <ArrowUpRight size={15} aria-hidden="true" />
-            </a>
+            </motion.a>
           </motion.div>
 
           <motion.div
@@ -56,6 +62,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, delay: 0.16 }}
+            whileHover={!reduceMotion ? { scale: 1.02, borderColor: 'rgba(118, 228, 212, 0.35)' } : undefined}
           >
             <div>
               <span className="about-card__label">The sweet spot</span>
@@ -63,14 +70,22 @@ export default function About() {
               <p className="about-card__role">Creative technologist · Full-stack developer</p>
             </div>
             <div className="about-stats">
-              <div className="about-stat">
+              <motion.div
+                className="about-stat"
+                whileHover={!reduceMotion ? { scale: 1.05, borderColor: 'rgba(118, 228, 212, 0.25)' } : undefined}
+                transition={{ duration: 0.2 }}
+              >
                 <strong><Layers size={16} aria-hidden="true" /> End to end</strong>
                 <span>From idea to interface</span>
-              </div>
-              <div className="about-stat">
+              </motion.div>
+              <motion.div
+                className="about-stat"
+                whileHover={!reduceMotion ? { scale: 1.05, borderColor: 'rgba(118, 228, 212, 0.25)' } : undefined}
+                transition={{ duration: 0.2 }}
+              >
                 <strong><Palette size={16} aria-hidden="true" /> Detail led</strong>
                 <span>Clarity in every interaction</span>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

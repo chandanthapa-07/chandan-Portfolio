@@ -32,6 +32,7 @@ export default function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.45, delay: Math.min(index * 0.06, 0.3) }}
+              whileHover={!reduceMotion ? { scale: 1.02, x: 8 } : undefined}
             >
               <span className="timeline-year">{item.year}</span>
               <div>
